@@ -17,8 +17,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">40</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">40</stringProp>
+        <stringProp name="ThreadGroup.num_threads">4</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">4</stringProp>
         <longProp name="ThreadGroup.start_time">1421474660000</longProp>
         <longProp name="ThreadGroup.end_time">1421474660000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -37,7 +37,7 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">${vel_hostname}</stringProp>
+          <stringProp name="HTTPSampler.domain">${__property(vel_hostname)}</stringProp>
           <stringProp name="HTTPSampler.port">443</stringProp>
           <stringProp name="HTTPSampler.connect_timeout"></stringProp>
           <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -86,7 +86,7 @@
         </hashTree>
         <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
-          <stringProp name="LoopController.loops">90</stringProp>
+          <stringProp name="LoopController.loops">9</stringProp>
         </LoopController>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="play_test_case" enabled="true">
@@ -100,7 +100,7 @@
                 </elementProp>
               </collectionProp>
             </elementProp>
-            <stringProp name="HTTPSampler.domain">${vel_hostname}</stringProp>
+            <stringProp name="HTTPSampler.domain">${__property(vel_hostname)}</stringProp>
             <stringProp name="HTTPSampler.port">443</stringProp>
             <stringProp name="HTTPSampler.connect_timeout"></stringProp>
             <stringProp name="HTTPSampler.response_timeout"></stringProp>
@@ -161,7 +161,7 @@ return timer;</stringProp>
           </ConstantThroughputTimer>
           <hashTree/>
         </hashTree>
-        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
           <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
             <name>saveConfig</name>
@@ -188,6 +188,7 @@ return timer;</stringProp>
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
@@ -221,6 +222,7 @@ return timer;</stringProp>
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
@@ -232,12 +234,6 @@ return timer;</stringProp>
             <elementProp name="token" elementType="Argument">
               <stringProp name="Argument.name">token</stringProp>
               <stringProp name="Argument.value"></stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="vel_hostname" elementType="Argument">
-              <stringProp name="Argument.name">vel_hostname</stringProp>
-              <stringProp name="Argument.value">vel-perf.spirenteng.com</stringProp>
-              <stringProp name="Argument.desc">Velocity hostname</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
             <elementProp name="user_id" elementType="Argument">
@@ -255,11 +251,6 @@ return timer;</stringProp>
               <stringProp name="Argument.value">eyJpZCI6ICIyNDg0ZmJhMi04MjBiLTQxODgtOTUwYi05YmYwZDY3ODM3YzgiLCAic2lnbmF0dXJlIjogImMzMWM5YzAyOWQ0OTlkMzUxYWNiZjE3ZmFiZTVkNmFhZGY3NWIxMjM2NTY2ZTZjNjJkNzBlMjgwMmQzZjE3NGY5MzhmOTYzMWUwNWM3NDNlYTgzMWQ2NDQ3OTE0ZjZiMDAzNWUwMzEyNjcxZWIzODUwZjNjZGU3NGMxYjYxOTg4ZDdjZGU3YWZiMWU1MmRiYjQyODY5MGQ1YmY0ZWFhMzc2ZmNmOWI0NjZlZjUxMWNkNjllZjRiN2VlNWY2MTc2ZTVkZDg3ODE0N2FlODdmMDFiMjk0MGYxM2ZlYzUyZDZhODM4MDA1YTUwMzM5ZjIxNzFlOWU3NmE0MmE1NDE0MmYifQ==</stringProp>
               <stringProp name="Argument.metadata">=</stringProp>
             </elementProp>
-            <elementProp name="results.dir" elementType="Argument">
-              <stringProp name="Argument.name">results.dir</stringProp>
-              <stringProp name="Argument.value">/home/spirent/</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
             <elementProp name="tc_path" elementType="Argument">
               <stringProp name="Argument.name">tc_path</stringProp>
               <stringProp name="Argument.value">velocity_test_contents.itar/test_cases/super_1000steps.fftc</stringProp>
@@ -273,7 +264,7 @@ return timer;</stringProp>
           </collectionProp>
         </Arguments>
         <hashTree/>
-        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="true">
+        <DebugSampler guiclass="TestBeanGUI" testclass="DebugSampler" testname="Debug Sampler" enabled="false">
           <boolProp name="displayJMeterProperties">false</boolProp>
           <boolProp name="displayJMeterVariables">true</boolProp>
           <boolProp name="displaySystemProperties">false</boolProp>
@@ -306,10 +297,11 @@ return timer;</stringProp>
               <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
               <assertionsResultsToSave>0</assertionsResultsToSave>
               <bytes>true</bytes>
+              <url>true</url>
               <threadCounts>true</threadCounts>
             </value>
           </objProp>
-          <stringProp name="filename">${results.dir}/vel.csv</stringProp>
+          <stringProp name="filename">${__property(results_dir)}/${__property(raw_data_file)}</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>
