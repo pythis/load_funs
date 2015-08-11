@@ -1,0 +1,1 @@
+sudo docker run -t --rm -v $(pwd):/testroot -i heyu/jmeter jmeter.sh -n -p /testroot/vel-user.properties -t /testroot/vel-exec-test.jmx -j /testroot/jmeter.log
