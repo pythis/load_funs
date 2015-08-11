@@ -10,7 +10,8 @@ ENV PLUGINS_PATH $JMETER_PATH/plugins
 ENV PATH $JMETER_PATH/bin/:$PATH
 
 # Install Jmeter & dependencies
-RUN apt-get update && apt-get install -y default-jre wget unzip 
+RUN apt-get update && apt-get install -y --no-install-recommends openjdk-7-jre-headless && \
+    apt-get install -y wget unzip 
 
 RUN mkdir -p $JMETER_PATH && cd $JMETER_PATH && \
     wget http://www.eu.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz && \

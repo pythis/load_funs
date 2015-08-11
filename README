@@ -1,1 +1,9 @@
+To run a test:
 sudo docker run -t --rm -v $(pwd):/testroot -i heyu/jmeter jmeter.sh -n -p /testroot/vel-user.properties -t /testroot/vel-exec-test.jmx -j /testroot/jmeter.log
+
+To remove unused imange or container to save space:
+sudo docker rmi $(sudo docker images -a | grep "^<none>" | awk '{print $3}')
+sudo docker images
+sudo docker rm $(sudo docker ps -a -q)
+
+
