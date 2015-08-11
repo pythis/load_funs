@@ -1,0 +1,31 @@
+#FROM ubuntu:14.04
+FROM debian:jessie
+MAINTAINER Henry Yu <henry.yu@spirent.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV JMETER_VERSION 2.13
+ENV PLUGINS_VERSION 1.3.0
+ENV JMETER_PATH /var/jmeter
+ENV PLUGINS_PATH $JMETER_PATH/plugins
+ENV PATH $JMETER_PATH/bin/:$PATH
+
+# Install Jmeter & dependencies
+RUN apt-get update && apt-get install -y default-jre wget unzip 
+
+RUN mkdir -p $JMETER_PATH && cd $JMETER_PATH && \
+    wget http://www.eu.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz && \
+    tar -zxf apache-jmeter-$JMETER_VERSION.tgz && \
+    mv apache-jmeter-$JMETER_VERSION/* $JMETER_PATH/. && \
+    mkdir -p $PLUGINS_PATH && \
+    wget -q http://jmeter-plugins.org/downloads/file/JMeterPlugins-ExtrasLibs-$PLUGINS_VERSION.zip && \
+    unzip -o -d $PLUGINS_PATH JMeterPlugins-ExtrasLibs-$PLUGINS_VERSION.zip && \
+    wget -q http://jmeter-plugins.org/downloads/file/JMeterPlugins-Extras-$PLUGINS_VERSION.zip && \
+    unzip -o -d $PLUGINS_PATH JMeterPlugins-Extras-$PLUGINS_VERSION.zip && \
+    wget -q http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-$PLUGINS_VERSION.zip && \
+    unzip -o -d $PLUGINS_PATH JMeterPlugins-Standard-$PLUGINS_VERSION.zip && \
+    cp $PLUGINS_PATH/lib/*.jar $JMETER_PATH/lib/ && \
+    cp $PLUGINS_PATH/lib/ext/*.jar $JMETER_PATH/lib/ext/ && \
+    rm -rf apache-jmeter-$JMETER_VERSION.tgz $JMETER_PATH/apache-jmeter-$JMETER_VERSION *.zip $PLUGINS_PATH
+
+WORKDIR $JMETER_PATH/bin
+
